@@ -1,1 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      ul.menu {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333
+      }
+
+      li.menu {
+      float:left;
+      color: white;
+      }
+
+      li.menu a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <ul class = "menu">
+      <li class = "menu"><a href="/index">Hjem</a></li>
+      {% if current_user.is_authenticated %}
+      <li class = "menu"><a href="/dashboard">Dashboard</a></li>
+      {% else %}
+      <li class = "menu"><a href="/auth/login">Logg inn</a></li>
+      {% endif %}
+      <li class = "menu"><a>About</a></li>
+    </ul>
+    <br>
+    {% block content %}{% endblock %}
+  </body>
+</html>
 
