@@ -31,7 +31,7 @@ def login():
         if user and user.check_password(form.password.data):
             login_user(user)
             flash('Welcome %s' % user.username)
-            return redirect(url_for('index'))
+            return redirect(url_for('.index'))
         
         else:
             flash('Wrong email or password', 'error-message')
@@ -47,9 +47,16 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash('Account creation successful')
-        return redirect(url_for('index'))
+        return redirect(url_for('.index'))
     
     return render_template("register.html", form=form)
-        
 
-        
+@mod_auth.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('.index'))
+
+
+@mod_auth.route('/index')
+def index():
+    return render_template("index.html")
