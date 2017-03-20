@@ -36,7 +36,7 @@ def login():
         else:
             flash('Wrong email or password', 'error-message')
 
-    return render_template("login.html", form=form)
+    return render_template("auth/login.html", form=form)
 
 @mod_auth.route('/register', methods=['GET','POST'])
 def register():
@@ -49,7 +49,7 @@ def register():
         flash('Account creation successful')
         return redirect(url_for('.index'))
     
-    return render_template("register.html", form=form)
+    return render_template("auth/register.html", form=form)
 
 @mod_auth.route('/logout')
 def logout():
@@ -59,4 +59,4 @@ def logout():
 
 @mod_auth.route('/index')
 def index():
-    return render_template("index.html")
+    return render_template("auth/index.html")
