@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+<form action="" method="POST" name="problem">
+  {{ form.hidden_tag() }}
+  <div id="name">
+    <h1>Name</h1>
+    {{ form.name() }}
+  </div>
+  <div id="content">
+    <h1>Content</h1>
+    {{ form.content() }}
+  </div>
+  <div id="variables">
+    <h1>Variables</h1>
+    {{ form.variables() }}
+  </div>
+  <div id="answer">
+    <h1>Answer</h1>
+    {{ form.answer() }}
+  </div>
+  <div id="submit">
+    <input type="submit" value="Add/Change">
+  </div>
+</form>
+{% endblock %}
