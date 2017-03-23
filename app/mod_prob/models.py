@@ -2,12 +2,16 @@ from app import db
 from random import randint, uniform, seed
 from jinja2 import Template
 
+class Base(db.Model):
+    __abstract__ = True
 
-class Problem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
+class Problem(Base):
+    __tablename__ = 'prob_problem'
+    
     name = db.Column(db.Text)
     content = db.Column(db.Text)
     variables = db.Column(db.Text)
@@ -22,13 +26,13 @@ class Problem(db.Model):
 
     def render_content(self,seeding):
         seed(seeding)
-        var = eval(selv.variables)
+        var = eval(self.variables)
         contentTemplate = Template(self.content)
         return contentTemplate.render(var)
 
     def right_answer(self, seeding, ans):
         seed(seeding)
-        var = eval(selv.variables)
+        var = eval(self.variables)
         locals().update(var)
         correctAnswer = eval(self.answer)
 
